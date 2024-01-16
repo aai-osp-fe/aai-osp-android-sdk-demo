@@ -43,8 +43,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
 //    implementation 'com.ooa.sdk:core:1.0.16'
-    implementation 'com.ooa.sdk:self:1.0.21'
-    implementation 'com.ooa.sdk:ment:1.0.21'
+    implementation 'ai.advance.osp:selfie:1.0.2'
+    implementation 'ai.advance.osp:document:1.0.2'
 
     implementation(name:'facetec-sdk-9.6.64', ext:'aar')
 }

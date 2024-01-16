@@ -12,7 +12,7 @@ import com.aai.core.OSPProcessCallback
 import com.aai.core.OSPSdk
 import com.aai.core.processManager.model.NodeCode
 import com.aai.core.processManager.model.UrlConst
-import com.aai.iqa.node.DocumentNode
+import com.aai.document.node.DocumentNode
 import com.aai.onestop.network.HeaderCallback
 import com.aai.onestop.network.HttpUrlConnectionClient
 import com.aai.onestop.network.NetRequest
@@ -72,6 +72,10 @@ class MainActivity : AppCompatActivity() {
                             println("processCallback: onExit(nodeCode: $nodeCode)")
                         }
 
+                        override fun onFinish(status: Boolean) {
+                            println("processCallback: onFinish(status: $status)")
+                        }
+
                         override fun onError(message: String?) {
                             println("processCallback: onError(message: $message)")
                         }
@@ -82,19 +86,14 @@ class MainActivity : AppCompatActivity() {
                         ) {
                             println("processCallback: onEvent(eventName: $eventName, params: $params)")
                         }
-
-                        override fun onComplete() {
-                            println("processCallback: onComplete")
-                        }
-
                     }
                 )
             )
             if (token.isEmpty()) return@setOnClickListener
-            val instance = OSPSdk.instance
-            instance.registerNode(NodeCode.SELFIE, SelfieNode())
-            instance.registerNode(NodeCode.DOCUMENT_VERIFICATION, DocumentNode())
-            instance.startFlow(this@MainActivity)
+            OSPSdk.instance
+                .registerNode(NodeCode.SELFIE, SelfieNode())
+                .registerNode(NodeCode.DOCUMENT_VERIFICATION, DocumentNode())
+                .startFlow(this@MainActivity)
         }
     }
 

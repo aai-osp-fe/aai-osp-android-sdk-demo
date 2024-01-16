@@ -75,8 +75,8 @@ flatDir { dirs("${rootProject.projectDir}/app/libs") }
 ```
 
 ```agsl
-implementation 'com.ooa.sdk:self:1.0.21'
-implementation 'com.ooa.sdk:ment:1.0.21'
+implementation 'com.ooa.sdk:selfie:1.0.21'
+implementation 'com.ooa.sdk:document:1.0.21'
 implementation(name:'facetec-sdk-9.6.64', ext:'aar')
 ```
 
@@ -93,7 +93,7 @@ class MyApp: Application() {
                 key = "",
                 sdkToken = "",
                 processCallback = object : OSPProcessCallback {
-                    override fun onComplete() {}
+                    override fun onFinish(status: Boolean) {}
 
                     override fun onError(message: String?) {}
 
@@ -116,13 +116,10 @@ Or you can initialize it when needed.The code in the demo is initialized only wh
 When the SDK initialization is successful, register the nodes for the functionalities you need. For example, if you need to use Document and Selfie functionalities, then register these two nodes.
 
 ```kotlin
-val instance = OSPSdk.instance
-instance.registerNode(NodeCode.SELFIE, SelfieNode())
-instance.registerNode(NodeCode.DOCUMENT_VERIFICATION, DocumentNode())
-```
-Afterwards, you can start a Flow process.
-```kotlin
-instance.startFlow(this@MainActivity)
+OSPSdk.instance
+    .registerNode(NodeCode.SELFIE, SelfieNode())
+    .registerNode(NodeCode.DOCUMENT_VERIFICATION, DocumentNode())
+    .startFlow(this@MainActivity)
 ```
 
 # Device requirements
