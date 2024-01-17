@@ -46,5 +46,5 @@ dependencies {
     implementation 'ai.advance.osp:selfie:1.0.2'
     implementation 'ai.advance.osp:document:1.0.2'
 
-    implementation(name:'facetec-sdk-9.6.64', ext:'aar')
+    implementation(name:'face-sdk-9.6.64', ext:'aar')
 }
