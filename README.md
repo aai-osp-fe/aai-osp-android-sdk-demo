@@ -10,7 +10,12 @@
 4. Wait for the project to load. If Android studio asks you to reload project on startup, select Yes.
 5. Run app.
 
-When the app is running, you need to perform two steps. The first step is to obtain an sdkToken, which is a necessary parameter to start the process. A quick access is provided in the demo to obtain the sdkToken. In your environment, this parameter needs to be obtained from your server. The second step is to click the Start button to initiate the process.
+## Start a flow
+When the app is running, you need to perform two steps. 
+### Step1 Get an sdkToken
+The first step is to obtain an sdkToken, which is a necessary parameter to start the process. A quick access is provided in the demo to obtain the sdkToken. In your environment, this parameter needs to be obtained from your server. 
+### Step2 Start the flow
+The second step is to click the Start button to initiate the process.
 
 The current SDK supports two nodes: ID photo mobile and live detection. Each node exists independently. You can selectively integrate specific features.  
 
@@ -23,61 +28,83 @@ The current SDK supports two nodes: ID photo mobile and live detection. Each nod
 
 #### 1.Document
 
-If you only integrate the document node, first set it in settings.gradle as follows:
+If you only need to integrate the document node, you need to follow these 3 steps:   
+1. Copy the core-release-1.0.0.aar and document-release-1.0.0.aar files from the demo into your project, these two files are located under the app->libs directory in the project.   
+2. In settings.gradle, set the following:
+```groovy
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
 
-```agsl
-maven {
-    allowInsecureProtocol = true
-    url "http://localhost:8081/repository/poo/"
+        maven { url 'https://maven.microblink.com' }
+        flatDir { dirs("${rootProject.projectDir}/app/libs") }
+    }
 }
-maven { url 'https://maven.microblink.com' }
 ```
+3. In your project's build.gradle, add the dependency.  
 
-Then, in your project's build.gradle, add the dependency.  
-
-```agsl
-implementation 'com.ooa.sdk:ment:1.0.21'
+```groovy
+dependencies {
+    implementation(name:'core-release-v1.0.0', ext:'aar')
+    implementation(name:'document-release-1.0.0', ext:'aar')
+}
 ```
 
 #### 2.Selfie
 
-If you only integrate the selfie node, first set it in settings.gradle as follows:
+If you only need to integrate the document node, you need to follow these 3 steps:
+1. Copy the core-release-1.0.0.aar, document-release-1.0.0.aar and face-sdk-9.6.64.aar files from the demo into your project, these three files are located under the app->libs directory in the project.
+2. In settings.gradle, set the following:
+```groovy
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
 
-```agsl
-maven {
-    allowInsecureProtocol = true
-    url "http://localhost:8081/repository/poo/"
+        flatDir { dirs("${rootProject.projectDir}/app/libs") }
+    }
 }
-
-flatDir { dirs("${rootProject.projectDir}/app/libs") }
 
 ```
 
-The 'dirs' path in the flatDir tag points to a local AAR package, which is used for facial recognition. You can obtain this AAR from the demo and place it in the appropriate directory within your project.  
-Then, in your project's build.gradle, add the dependency.
-
-```agsl
-implementation 'com.ooa.sdk:selfie:1.0.21'
-implementation(name:'facetec-sdk-9.6.64', ext:'aar')
+3. In your project's build.gradle, add the dependency.
+```groovy
+dependencies {
+    implementation(name:'core-release-v1.0.0', ext:'aar')
+    implementation(name:'selfie-release-1.0.0', ext:'aar')
+    implementation(name:'face-sdk-9.6.64', ext:'aar')
+}
 ```
 
 #### 3.Document & Selfie
 
-If you need to use both of them, then configure as follows:
+If you only need both of them, you need to follow these 3 steps:
+1. Copy the core-release-1.0.0.aar, document-release-1.0.0.aar, selfie-release-1.0.0.aar and face-sdk-9.6.64.aar files from the demo into your project, these four files are located under the app->libs directory in the project.
+2. In settings.gradle, set the following:
 
-```agsl
-maven {
-    allowInsecureProtocol = true
-    url "http://localhost:8081/repository/poo/"
+```groovy
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+
+        maven { url 'https://maven.microblink.com' }
+        flatDir { dirs("${rootProject.projectDir}/app/libs") }
+    }
 }
-maven { url 'https://maven.microblink.com' }
-flatDir { dirs("${rootProject.projectDir}/app/libs") }
 ```
 
-```agsl
-implementation 'com.ooa.sdk:selfie:1.0.21'
-implementation 'com.ooa.sdk:document:1.0.21'
-implementation(name:'facetec-sdk-9.6.64', ext:'aar')
+```groovy
+dependencies {
+    implementation(name:'face-sdk-9.6.64', ext:'aar')
+    implementation(name:'core-release-v1.0.0', ext:'aar')
+    implementation(name:'document-release-1.0.0', ext:'aar')
+    implementation(name:'selfie-release-1.0.0', ext:'aar')
+}
 ```
 
 ### Init SDK
@@ -90,8 +117,7 @@ class MyApp: Application() {
         OSPSdk.instance.init(
             options = OSPOptions(
                 context = this,
-                key = "",
-                sdkToken = "",
+                sdkToken = "Your sdkToken",
                 processCallback = object : OSPProcessCallback {
                     override fun onFinish(status: Boolean) {}
 
@@ -110,6 +136,7 @@ class MyApp: Application() {
 }
 ```
 Or you can initialize it when needed.The code in the demo is initialized only when it is really needed.
+
 
 ### Start a flow
 

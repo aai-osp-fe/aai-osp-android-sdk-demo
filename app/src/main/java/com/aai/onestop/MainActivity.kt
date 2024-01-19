@@ -49,10 +49,6 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-//        findViewById<Button>(R.id.btnScan).setOnClickListener {
-//            startActivity(Intent(this, ScanActivity::class.java))
-//        }
-
 
         btnStartFlow.setOnClickListener {
             val token = tvSdkToken.text.toString()
@@ -60,9 +56,7 @@ class MainActivity : AppCompatActivity() {
             OSPSdk.instance.init(
                 OSPOptions(
                     context = MyApp.getInstance(),
-                    "blinkid-capture",
                     sdkToken = token,
-                    openLog = true,
                     processCallback = object : OSPProcessCallback {
                         override fun onReady() {
                             println("processCallback: onReady")
