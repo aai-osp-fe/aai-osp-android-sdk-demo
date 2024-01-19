@@ -49,6 +49,7 @@ dependencyResolutionManagement {
 dependencies {
     implementation(name:'core-release-v1.0.0', ext:'aar')
     implementation(name:'document-release-1.0.0', ext:'aar')
+    implementation("com.microblink:capture-ux:1.2.0")
 }
 ```
 
@@ -104,6 +105,7 @@ dependencies {
     implementation(name:'core-release-v1.0.0', ext:'aar')
     implementation(name:'document-release-1.0.0', ext:'aar')
     implementation(name:'selfie-release-1.0.0', ext:'aar')
+    implementation("com.microblink:capture-ux:1.2.0")
 }
 ```
 
