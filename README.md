@@ -17,7 +17,7 @@ The first step is to obtain an sdkToken, which is a necessary parameter to start
 ### Step2 Start the flow
 The second step is to click the Start button to initiate the process.
 
-The current SDK supports two nodes: ID photo mobile and live detection. Each node exists independently. You can selectively integrate specific features.  
+The current SDK only supports live bodies.
 
 ## Integration
 
@@ -28,7 +28,8 @@ The current SDK supports two nodes: ID photo mobile and live detection. Each nod
 
 #### 1.Selfie
 
-If you only need to integrate the selfie node, you need to follow these 3 steps:
+To integrate the SDK, the following 3 steps are required:
+
 1. Copy the core-release-1.0.0.aar, selfie-release-1.0.0.aar and face-sdk-9.6.64.aar files from the demo into your project, these three files are located under the app->libs directory in the project.
 2. In settings.gradle, set the following:
 ```groovy
@@ -86,7 +87,7 @@ Or you can initialize it when needed.The code in the demo is initialized only wh
 
 ### Start a flow
 
-When the SDK initialization is successful, register the nodes for the functionalities you need. For example, if you need to use Document and Selfie functionalities, then register these two nodes.
+When the SDK initialization is successful, register the nodes for the functionalities you need. For example, if you need to use Selfie functionalities, then register the node.
 
 ```kotlin
 OSPSdk.instance
@@ -95,4 +96,4 @@ OSPSdk.instance
 ```
 
 # Device requirements
-OSP SDK requires Android API level 21 or newer.
+OSP SDK requires Android API level 21(Android5.0) or newer.
