@@ -26,37 +26,10 @@ The current SDK supports two nodes: ID photo mobile and live detection. Each nod
 
 ### Dependence on settings
 
-#### 1.Document
+#### 1.Selfie
 
-If you only need to integrate the document node, you need to follow these 3 steps:   
-1. Copy the core-release-1.0.0.aar and document-release-1.0.0.aar files from the demo into your project, these two files are located under the app->libs directory in the project.   
-2. In settings.gradle, set the following:
-```groovy
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
-
-        maven { url 'https://maven.microblink.com' }
-        flatDir { dirs("${rootProject.projectDir}/app/libs") }
-    }
-}
-```
-3. In your project's build.gradle, add the dependency.  
-
-```groovy
-dependencies {
-    implementation(name:'core-release-v1.0.0', ext:'aar')
-    implementation(name:'document-release-1.0.0', ext:'aar')
-    implementation("com.microblink:capture-ux:1.2.0")
-}
-```
-
-#### 2.Selfie
-
-If you only need to integrate the document node, you need to follow these 3 steps:
-1. Copy the core-release-1.0.0.aar, document-release-1.0.0.aar and face-sdk-9.6.64.aar files from the demo into your project, these three files are located under the app->libs directory in the project.
+If you only need to integrate the selfie node, you need to follow these 3 steps:
+1. Copy the core-release-1.0.0.aar, selfie-release-1.0.0.aar and face-sdk-9.6.64.aar files from the demo into your project, these three files are located under the app->libs directory in the project.
 2. In settings.gradle, set the following:
 ```groovy
 dependencyResolutionManagement {
@@ -77,35 +50,6 @@ dependencies {
     implementation(name:'core-release-v1.0.0', ext:'aar')
     implementation(name:'selfie-release-1.0.0', ext:'aar')
     implementation(name:'face-sdk-9.6.64', ext:'aar')
-}
-```
-
-#### 3.Document & Selfie
-
-If you only need both of them, you need to follow these 3 steps:
-1. Copy the core-release-1.0.0.aar, document-release-1.0.0.aar, selfie-release-1.0.0.aar and face-sdk-9.6.64.aar files from the demo into your project, these four files are located under the app->libs directory in the project.
-2. In settings.gradle, set the following:
-
-```groovy
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
-
-        maven { url 'https://maven.microblink.com' }
-        flatDir { dirs("${rootProject.projectDir}/app/libs") }
-    }
-}
-```
-
-```groovy
-dependencies {
-    implementation(name:'face-sdk-9.6.64', ext:'aar')
-    implementation(name:'core-release-v1.0.0', ext:'aar')
-    implementation(name:'document-release-1.0.0', ext:'aar')
-    implementation(name:'selfie-release-1.0.0', ext:'aar')
-    implementation("com.microblink:capture-ux:1.2.0")
 }
 ```
 
@@ -147,7 +91,6 @@ When the SDK initialization is successful, register the nodes for the functional
 ```kotlin
 OSPSdk.instance
     .registerNode(NodeCode.SELFIE, SelfieNode())
-    .registerNode(NodeCode.DOCUMENT_VERIFICATION, DocumentNode())
     .startFlow(this@MainActivity)
 ```
 

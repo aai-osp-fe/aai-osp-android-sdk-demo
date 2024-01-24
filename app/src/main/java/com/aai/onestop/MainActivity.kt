@@ -12,7 +12,6 @@ import com.aai.core.OSPProcessCallback
 import com.aai.core.OSPSdk
 import com.aai.core.processManager.model.NodeCode
 import com.aai.core.processManager.model.UrlConst
-import com.aai.document.node.DocumentNode
 import com.aai.onestop.network.HeaderCallback
 import com.aai.onestop.network.HttpUrlConnectionClient
 import com.aai.onestop.network.NetRequest
@@ -86,7 +85,6 @@ class MainActivity : AppCompatActivity() {
             if (token.isEmpty()) return@setOnClickListener
             OSPSdk.instance
                 .registerNode(NodeCode.SELFIE, SelfieNode())
-                .registerNode(NodeCode.DOCUMENT_VERIFICATION, DocumentNode())
                 .startFlow(this@MainActivity)
         }
     }

@@ -44,6 +44,5 @@ dependencies {
 
     implementation(name:'face-sdk-9.6.64', ext:'aar')
     implementation(name:'core-release-v1.0.0', ext:'aar')
-    implementation(name:'document-release-1.0.0', ext:'aar')
     implementation(name:'selfie-release-1.0.0', ext:'aar')
 }
