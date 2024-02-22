@@ -62,22 +62,39 @@ class MyApp: Application() {
     override fun onCreate() {
         super.onCreate()
         OSPSdk.instance.init(
-            options = OSPOptions(
-                context = this,
-                sdkToken = "Your sdkToken",
-                processCallback = object : OSPProcessCallback {
-                    override fun onFinish(status: Boolean) {}
-
-                    override fun onError(message: String?) {}
-
-                    override fun onEvent(eventName: String, params: MutableMap<String, String>?) {}
-
-                    override fun onExit(nodeCode: String) {}
-
-                    override fun onReady() {}
-                }
+            OSPOptions(
+                context = MyApp.getInstance(),
+                sdkToken = token,
             )
         )
+            .environment(OSPEnvironment.SANDBOX)
+            .registerNode(NodeCode.SELFIE, SelfieNode())
+            .registerCallback(object : OSPProcessCallback {
+                override fun onError(errorCode: String?, transId: String) {
+
+                }
+
+                override fun onEvent(
+                    transId: String,
+                    eventName: String,
+                    params: MutableMap<String, String>?
+                ) {
+
+                }
+
+                override fun onExit(nodeCode: String, transId: String) {
+                    
+                }
+
+                override fun onFinish(status: Boolean, transId: String) {
+
+                }
+
+                override fun onReady() {
+
+                }
+
+            })
     }
 
 }
@@ -90,9 +107,7 @@ Or you can initialize it when needed.The code in the demo is initialized only wh
 When the SDK initialization is successful, register the nodes for the functionalities you need. For example, if you need to use Selfie functionalities, then register the node.
 
 ```kotlin
-OSPSdk.instance
-    .registerNode(NodeCode.SELFIE, SelfieNode())
-    .startFlow(this@MainActivity)
+OSPSdk.instance.startFlow(this@MainActivity)
 ```
 
 # Device requirements

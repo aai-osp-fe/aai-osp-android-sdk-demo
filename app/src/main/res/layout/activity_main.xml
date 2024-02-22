@@ -11,7 +11,36 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Step1: get a sdkToken" />
+        android:text="Step1: Input an api key and a journey id."
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Alternatively, you can use the default values in the input box" />
+
+    <EditText
+        android:id="@+id/etKey"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Input api key"
+        android:text="d9eafc7f557afaf4" />
+
+    <EditText
+        android:id="@+id/etJourneyId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Input a journey id"
+        android:text="55775" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Step2: Get an sdkToken"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/btnGetToken"
@@ -28,50 +57,19 @@
         android:layout_height="wrap_content"
         tools:text="sdf8790d8f098f080sd80s" />
 
-    <!--  03fe649a-86bd-4fba-b584-739d0a7b79f7  -->
-    <EditText
-        android:id="@+id/etSdkToken"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="input a validate url"
-        android:paddingStart="5dp"
-        android:paddingEnd="5dp"
-        android:text="https://dev-oop-client.advai.cn/intl/openapi/hostLink/start?accountSdkToken=f4827c9e-5242-4d90-ae24-640db8236258" />
-
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Step2: start the flow" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btnStartFlow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Start Flow" />
-
-        <Button
-            android:id="@+id/btnClearToken"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="Clear Url" />
-
-    </LinearLayout>
+        android:text="Step3: Start the flow"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <Button
-        android:id="@+id/btnScan"
+        android:id="@+id/btnStartFlow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="使用扫码方式" />
+        android:layout_marginTop="10dp"
+        android:text="Start Flow" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
