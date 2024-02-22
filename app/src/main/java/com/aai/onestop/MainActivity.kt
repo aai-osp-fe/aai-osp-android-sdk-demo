@@ -57,39 +57,8 @@ class MainActivity : AppCompatActivity() {
             )
                 .environment(OSPEnvironment.SANDBOX)
                 .registerNode(NodeCode.SELFIE, SelfieNode())
-                .registerCallback(object : OSPProcessCallback {
-                    override fun onError(errorCode: String?, transId: String) {
-
-                    }
-
-                    override fun onEvent(
-                        transId: String,
-                        eventName: String,
-                        params: MutableMap<String, String>?
-                    ) {
-
-                    }
-
-                    override fun onExit(nodeCode: String, transId: String) {
-                        Toast.makeText(this@MainActivity, "exit", Toast.LENGTH_SHORT).show()
-                    }
-
-                    override fun onFinish(status: Boolean, transId: String) {
-                        if (status) {
-                            Toast.makeText(
-                                this@MainActivity,
-                                "You have completed this process",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                    }
-
-                    override fun onReady() {
-
-                    }
-
-                })
-                .startFlow(this@MainActivity)
+                .registerCallback(OSPProcessCallbackImpl(this))
+                .startFlow(this)
         }
     }
 
