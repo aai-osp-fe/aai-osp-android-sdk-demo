@@ -1,15 +1,19 @@
 package com.aai.onestop
 
+import android.app.ProgressDialog
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.aai.core.processManager.loading.CommonLoading
 import com.aai.core.processManager.model.NodeCode
 import com.aai.core.processManager.model.OSPEnvironment
 import com.aai.core.sdk.OSPOptions
 import com.aai.core.sdk.OSPSdk
+import com.aai.core.utils.setSafeOnClickListener
 import com.aai.document.node.DocumentNode
 import com.aai.onestop.network.HttpUrlConnectionClient
 import com.aai.onestop.network.NetRequest
@@ -24,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var tvSdkToken: TextView
     private lateinit var etKey: EditText
     private lateinit var etJourneyId: EditText
+    private var progressDialog: ProgressDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,14 +43,21 @@ class MainActivity : AppCompatActivity() {
         etKey = findViewById(R.id.etKey)
         etJourneyId = findViewById(R.id.etJourneyId)
         btnGetToken.setOnClickListener {
+            if (progressDialog == null) {
+                progressDialog = ProgressDialog(this)
+                progressDialog?.setMessage("Loading...")
+                progressDialog?.setCancelable(false)
+
+            }
+            progressDialog?.show()
             getSDKToken()
         }
 
-        btnStartFlow.setOnClickListener {
+        btnStartFlow.setSafeOnClickListener {
             val token = tvSdkToken.text.toString()
             if (token.isEmpty()) {
                 Toast.makeText(this@MainActivity, "sdkToken is empty", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
+                return@setSafeOnClickListener
             }
             OSPSdk.instance.init(
                 OSPOptions(
@@ -80,6 +92,7 @@ class MainActivity : AppCompatActivity() {
             request,
             netWorkCallback = object : NetWorkCallback {
                 override fun onSuccess(response: String) {
+                    progressDialog?.dismiss()
                     val json = JSONObject(response)
                     if (json.has("data")) {
                         val jsonData = json.getJSONObject("data")
@@ -91,6 +104,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun onError(code: String, message: String) {
+                    progressDialog?.dismiss()
                     Toast.makeText(this@MainActivity, message, Toast.LENGTH_SHORT).show()
                 }
             },
