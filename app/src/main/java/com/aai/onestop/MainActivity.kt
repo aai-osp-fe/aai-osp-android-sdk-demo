@@ -1,6 +1,5 @@
 package com.aai.onestop
 
-import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -10,9 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.aai.core.processManager.model.NodeCode
 import com.aai.core.processManager.model.OSPEnvironment
 import com.aai.core.sdk.OSPOptions
-import com.aai.core.sdk.OSPProcessCallback
 import com.aai.core.sdk.OSPSdk
-import com.aai.onestop.network.HeaderCallback
+import com.aai.document.node.DocumentNode
 import com.aai.onestop.network.HttpUrlConnectionClient
 import com.aai.onestop.network.NetRequest
 import com.aai.onestop.network.NetWorkCallback
@@ -57,6 +55,7 @@ class MainActivity : AppCompatActivity() {
             )
                 .environment(OSPEnvironment.SANDBOX)
                 .registerNode(NodeCode.SELFIE, SelfieNode())
+                .registerNode(NodeCode.DOCUMENT_VERIFICATION, DocumentNode())
                 .registerCallback(OSPProcessCallbackImpl(this))
                 .startFlow(this)
         }

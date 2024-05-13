@@ -26,11 +26,9 @@ The current SDK only supports live bodies.
 
 ### Dependence on settings
 
-#### 1.Selfie
-
 To integrate the SDK, the following 3 steps are required:
 
-1. Copy the core-release-1.0.0.aar, selfie-release-1.0.0.aar and face-sdk-9.6.64.aar files from the demo into your project, these three files are located under the app->libs directory in the project.
+1. Copy the osp-core-1.0.0.aar, osp-selfie-1.0.0.aar, osp-document-1.0.0.aar and osp-face-9.6.64.aar files from the demo into your project, these four files are located under the app->libs directory in the project.
 2. In settings.gradle, set the following:
 ```groovy
 dependencyResolutionManagement {
@@ -48,19 +46,20 @@ dependencyResolutionManagement {
 3. In your project's build.gradle, add the dependency.
 ```groovy
 dependencies {
-    implementation(name:'core-release-v1.0.0', ext:'aar')
-    implementation(name:'selfie-release-1.0.0', ext:'aar')
-    implementation(name:'face-sdk-9.6.64', ext:'aar')
+    implementation(name:'osp-core-1.0.0.aar', ext:'aar')
+    implementation(name:'osp-selfie-1.0.0', ext:'aar')
+    implementation(name:'osp-document-1.0.0', ext:'aar')
+    implementation(name:'osp-face-9.6.64', ext:'aar')
 }
 ```
 
 ### Init SDK
-You can initialize the SDK in the Application's onCreate method.
+You can initialize the SDK where you need it.
 ```kotlin
-class MyApp: Application() {
+class MainActivity: AppcompatActivity() {
 
-    override fun onCreate() {
-        super.onCreate()
+    fun startFlow(token: String) {
+        super.onCreate(savedInstanceState)
         OSPSdk.instance.init(
             OSPOptions(
                 context = MyApp.getInstance(),
@@ -69,6 +68,7 @@ class MyApp: Application() {
         )
             .environment(OSPEnvironment.SANDBOX)
             .registerNode(NodeCode.SELFIE, SelfieNode())
+            .registerNode(NodeCode.DOCUMENT_VERIFICATION, DocumentNode())
             .registerCallback(object : OSPProcessCallback {
                 override fun onError(errorCode: String?, transId: String) {
 
@@ -99,7 +99,6 @@ class MyApp: Application() {
 
 }
 ```
-Or you can initialize it when needed.The code in the demo is initialized only when it is really needed.
 
 
 ### Start a flow

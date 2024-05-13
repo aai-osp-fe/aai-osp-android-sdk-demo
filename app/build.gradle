@@ -42,7 +42,8 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
-    implementation(name:'face-sdk-9.6.64', ext:'aar')
-    implementation(name:'core-release-1.0.0', ext:'aar')
-    implementation(name:'selfie-release-1.0.0', ext:'aar')
+    implementation(name:'osp-core-1.0.0', ext:'aar')
+    implementation(name:'osp-selfie-1.0.0', ext:'aar')
+    implementation(name:'osp-document-1.0.0', ext:'aar')
+    implementation(name:'osp-face-9.6.64', ext:'aar')
 }
