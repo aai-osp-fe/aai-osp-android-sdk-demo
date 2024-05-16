@@ -59,16 +59,20 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this@MainActivity, "sdkToken is empty", Toast.LENGTH_SHORT).show()
                 return@setSafeOnClickListener
             }
-            OSPSdk.instance.init(
-                OSPOptions(
-                    context = MyApp.getInstance(),
-                    sdkToken = token,
-                )
-            )
+            OSPSdk.instance
+                .init(MyApp.getInstance())
+                .setToken(token)
                 .environment(OSPEnvironment.SANDBOX)
                 .registerNode(NodeCode.SELFIE, SelfieNode())
                 .registerNode(NodeCode.DOCUMENT_VERIFICATION, DocumentNode())
-                .registerCallback(OSPProcessCallbackImpl(this))
+                .registerCallback(object : OSPProcessCallbackImpl(this) {
+                    override fun onFinish(status: Boolean, transId: String) {
+                        super.onFinish(status, transId)
+                        if (status) {
+                            tvSdkToken.text = ""
+                        }
+                    }
+                })
                 .startFlow(this)
         }
     }

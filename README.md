@@ -60,12 +60,8 @@ class MainActivity: AppcompatActivity() {
 
     fun startFlow(token: String) {
         super.onCreate(savedInstanceState)
-        OSPSdk.instance.init(
-            OSPOptions(
-                context = MyApp.getInstance(),
-                sdkToken = token,
-            )
-        )
+        OSPSdk.instance.init(MyApp.getInstance()) // Application context
+            .setSdkToken(token)
             .environment(OSPEnvironment.SANDBOX)
             .registerNode(NodeCode.SELFIE, SelfieNode())
             .registerNode(NodeCode.DOCUMENT_VERIFICATION, DocumentNode())

@@ -4,7 +4,7 @@ import android.content.Context
 import android.widget.Toast
 import com.aai.core.sdk.OSPProcessCallback
 
-class OSPProcessCallbackImpl(private val context: Context): OSPProcessCallback {
+open class OSPProcessCallbackImpl(private val context: Context): OSPProcessCallback {
     override fun onError(errorCode: String?, transId: String) {
 
     }
